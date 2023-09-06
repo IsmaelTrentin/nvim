@@ -54,10 +54,14 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+    local file_type = vim.bo.filetype;
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
-            vim.cmd.EslintFixAll();
             vim.lsp.buf.format()
+            if (file_type == 'javascript' or file_type == 'typescript') then
+                vim.cmd.EslintFixAll();
+            end
         end,
     })
 end)

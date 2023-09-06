@@ -95,5 +95,10 @@ return require('packer').startup(function(use)
         -- end
     }
 
+    -- lint
     use('mfussenegger/nvim-lint');
+
+    -- prettier
+    use('MunifTanjim/prettier.nvim');
+    use('jose-elias-alvarez/null-ls.nvim');
 end)
